@@ -15,10 +15,9 @@ $files | %{
 
     $contents =  gc $_.FullName -Raw
     foreach($replace in $replacers.Keys){
-        $contents = $contents -replace $replacers[$replace],$repository
+        $contents = $contents -replace $replace,$replacers[$replace]
     }
     $newFileName = $_.FullName -replace '.example',''
     $contents | Out-File -Encoding UTF8 -Force -FilePath $newFileName
-
 }
 
