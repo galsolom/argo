@@ -16,7 +16,7 @@ spec:
           - values.yaml
     path: argo/apps
     repoURL: {{ .Values.repo.url }}
-    targetRevision: {{ .Values.repo.branch }}
+    targetRevision: {{ .Values.repo.targetRevision }}
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

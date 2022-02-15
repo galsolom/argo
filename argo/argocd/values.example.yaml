@@ -1,6 +1,6 @@
 repo:
   url: &url https://github.com/galsolom/argo
-  branch: main
+  targetRevision: main
 
 argo-cd:
   server:
