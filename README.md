@@ -1,10 +1,14 @@
 # some argo generic ecosystem with self managed argocd server on docker-desktop
 ## before starting, change/edit the following:
+fork this repo and run the powershell script, it'll simply create new value files with your repo and some generic name for the tls secrets and the domain (e.g argocd.gals.local)
+```powershell
+example:
+.\fixer.ps1 -repository "https://github.com/galsolom/argo" -localNaming "gals"
+.\fixer.ps1 -repository "https://github.com/<your-repository>/argo" -localNaming "happyhippo"
+```
 
-* argo\apps\values.yaml .spec.source.repoURL, currently points at the github.com/galsolom/argo repository.
-* argo\argocd\values.yaml .repo, same as above.
-* all tls secrets are named gals-local-tls
-* all ingresses point to *.gals.local
+* all tls secrets are now named happyhippo-local-tls
+* all ingresses point to  *.happyhippo.local domain. (argocd.happyhippo.local, argoworkflows.happyhippo.local etc.)
 ## installation
 verify kuberentes context and connection
 ```
@@ -32,12 +36,14 @@ choco install mkcert
 in root dir:
 ```
 mkcert *.gals.local
+# or your name.. e.g: mkcert *.happyhippo.local
 # creating the tls secret using the cert above
 kubectl create ns argo
 kubectl create secret tls gals-local-tls --key  _wildcard.gals.local-key.pem --cert _wildcard.gals.local.pem -n argo
+# the tls secret name must match the ones under the ingress secret name.
+# kubectl create secret tls happyhippo-local-tls --key  _wildcard.happyhippo.local-key.pem --cert _wildcard.happyhippo.local.pem -n argo
 ```
 install argocd:
-(edit values yaml.. mostly ingress & tls secret name)
 ```
 helm install argocd -n argo .\argo\argocd
 ```

@@ -1,0 +1,47 @@
+﻿spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    # your fork url
+    repoURL: https://github.com/galsolom/argo
+    targetRevision: test-template
+  project: default
+  domain: .happyhippo.local
+
+enabledApplications:
+  - name: argocd
+    enabled: true
+    namespace: argo
+    url: argocd
+    #
+  - name: argoworkflows
+    enabled: true
+    namespace: argo
+    url: argoworkflows
+    #
+  - name: prometheus
+    enabled: false
+    namespace: prometheus
+    url: grafana
+    #
+  - name: minio
+    enabled: false
+    namespace: minio
+    url: consoleminio
+    #
+  - name: keda
+    enabled: false
+    namespace: keda
+    #
+  - name: keycloak
+    enabled: false
+    url: keycloak
+    namespace: keycloak
+# network
+  - name: metallb
+    enabled: true
+    namespace: metallb-system
+    #
+  - name: ingress-nginx
+    enabled: true
+    namespace: ingress-nginx

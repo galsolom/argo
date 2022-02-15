@@ -1,0 +1,50 @@
+﻿minio:
+ 
+  mode: standalone ## other supported values are "standalone", "gateway"
+
+  persistence:
+    enabled: true
+    annotations: {}
+    existingClaim: ""
+    storageClass: ""
+    VolumeName: ""
+    accessMode: ReadWriteOnce
+    size: 20Gi
+
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    labels: {}
+    annotations: {}
+    path: /
+    hosts:
+      - minio.happyhippo.local
+    tls: 
+      - secretName: happyhippo-local-tls
+        hosts:
+          - minio.happyhippo.local
+
+  consoleIngress:
+    enabled: true
+    ingressClassName: "nginx"
+    labels: {}
+    annotations: {}
+    path: /
+    hosts:
+      - consoleminio.happyhippo.local
+    tls: 
+      - secretName: happyhippo-local-tls
+        hosts:
+          - consoleminio.happyhippo.local
+
+  securityContext:
+    enabled: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+
+  resources:
+    requests:
+      memory: 16Gi
+
+

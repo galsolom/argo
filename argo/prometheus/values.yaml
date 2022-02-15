@@ -1,0 +1,31 @@
+﻿kube-prometheus-stack:
+  nameOverride: "kps"
+  fullnameOverride: "kps"
+  alertmanager:
+
+    enabled: true
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts: 
+        - alertmanager.happyhippo.local
+      paths: []
+      tls: 
+      - secretName: happyhippo-local-tls
+        hosts:
+        - alertmanager.happyhippo.local
+  grafana:
+    enabled: true
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - grafana.happyhippo.local
+      path: /
+      tls: 
+      - secretName: happyhippo-local-tls
+        hosts:
+        - grafana.happyhippo.local
+
