@@ -1,0 +1,33 @@
+argo-workflows:
+  server:
+    # -- Deploy the Argo Server
+    enabled: true
+
+    # -- Run the argo server in "secure" mode. Configure this value instead of `--secure` in extraArgs.
+    ## See the following documentation for more details on secure mode:
+    ## https://argoproj.github.io/argo-workflows/tls/
+    secure: false
+
+    extraArgs: 
+      - local 
+
+    ingress:
+      # -- Enable an ingress resource
+      enabled: true
+      annotations: {}
+      labels: {}
+      ingressClassName: nginx
+
+      hosts: 
+        - argoworkflows.gals.local
+
+      paths:
+        - /
+
+      pathType: Prefix
+      extraPaths: []
+
+      tls: 
+        - secretName: gals-local-tls
+          hosts:
+            - argoworkflows.gals.local

@@ -45,7 +45,7 @@ sync root app
 
 ```powershell
 # get initial password
-$argocdpass = kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_))}
+$argocdpass = kubectl -n argo get secret argocd-kinitial-admin-secret -o jsonpath="{.data.password}" | %{[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_))}
 # get argocd server pod
 $argocdpodname = kubectl get pods -n argo -l app.kubernetes.io/name=argocd-server | ?{$_ -like "*argocd-server*"} | %{$_.split()[0]} 
 
@@ -72,7 +72,7 @@ windows path:
 ```
 C:\Windows\System32\drivers\etc\hosts
 
-127.0.0.240 kubernetes.docker.internal argocd.gals.local argoworkflows.gals.local grafana.gals.local
+127.0.0.240 argocd.gals.local argoworkflows.gals.local grafana.gals.local
 ```
 verify argocd login is accessible
 browse to

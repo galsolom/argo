@@ -1,4 +1,4 @@
-repo: &repo -gitrepourl-
+repo: &repo https://github.com/galsolom/argo
 argo-cd:
   server:
     extraArgs: 
