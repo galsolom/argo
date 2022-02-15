@@ -1,4 +1,7 @@
-﻿repo: &repo https://github.com/galsolom/argo
+﻿repo:
+  url: &url https://github.com/galsolom/argo
+  branch: main
+
 argo-cd:
   server:
     extraArgs: 
@@ -24,5 +27,5 @@ argo-cd:
   configs:
     repositories: 
       repo:
-        url: *repo
+        url: *url
 

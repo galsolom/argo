@@ -22,6 +22,9 @@ $files | %{
         $contents = $contents.replace($replace,$replacers[$replace])
     }
     $newFileName = $_.FullName -replace '.example',''
+    if($newFileName -like "*templates*"){
+        echo "commenting out example yaml $($_.fullname)"
+    }
     $contents | Out-File -Encoding UTF8 -Force -FilePath $newFileName
 }
 
