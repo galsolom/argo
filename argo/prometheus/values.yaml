@@ -5,8 +5,8 @@
     hostRootFsMount: false
   alertmanager:
     enabled: true
-    #useExistingSecret: true
     alertmanagerSpec:
+      useExistingSecret: true
       logLevel: debug
       configMaps: 
       - alertmanager-cfg01
