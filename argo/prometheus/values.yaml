@@ -4,8 +4,18 @@
   prometheus-node-exporter:
     hostRootFsMount: false
   alertmanager:
-
     enabled: true
+    config:
+        global:
+          resolve_timeout: 1m
+          slack_api_url: 'https://hooks.slack.com/services/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'
+          route:
+             receiver: 'slack-galsolom-argo'
+          receivers:
+          - name: 'slack-galsolom-argo'
+          slack_configs:
+          - channel: '#alert-tests'
+            send_resolved: true
 
     ingress:
       enabled: true
