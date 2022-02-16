@@ -8,10 +8,10 @@
     alertmanagerSpec:
       useExistingSecret: true
       logLevel: debug
-      configMaps: 
-      - alertmanager-cfg01
-      secrets: 
-      - alertmanager-secret01
+      # configMaps: 
+      # - alertmanager-cfg01
+      # secrets: 
+      # - alertmanager-secret01
       
       # alertmanagerConfigSelector:
       #   matchExpressions:
