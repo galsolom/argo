@@ -1,6 +1,8 @@
 ﻿kube-prometheus-stack:
   nameOverride: "kps"
   fullnameOverride: "kps"
+  prometheus-node-exporter:
+    hostRootFsMount: false
   alertmanager:
 
     enabled: true
