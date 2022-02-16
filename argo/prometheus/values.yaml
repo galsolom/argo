@@ -7,19 +7,6 @@
     enabled: true
     alertmanagerSpec:
       useExistingSecret: true
-      logLevel: debug
-      # configMaps: 
-      # - alertmanager-cfg01
-      # secrets: 
-      # - alertmanager-secret01
-      
-      # alertmanagerConfigSelector:
-      #   matchExpressions:
-      #     - key: alertconfig
-      #       operator: In
-      #       values:
-      #         - cfg-01
-
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -30,9 +17,9 @@
       - secretName: happyhippo-local-tls
         hosts:
         - alertmanager.happyhippo.local
+  
   grafana:
     enabled: true
-
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -43,4 +30,17 @@
       - secretName: happyhippo-local-tls
         hosts:
         - grafana.happyhippo.local
+  
+  prometheus:
+    enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - prometheus.happyhippo.local
+      path: /
+      tls: 
+      - secretName: happyhippo-local-tls
+        hosts:
+        - prometheus.happyhippo.local
 
