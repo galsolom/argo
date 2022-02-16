@@ -5,13 +5,13 @@
     hostRootFsMount: false
   alertmanager:
     enabled: true
-    
-    alertmanagerConfigSelector:
-      matchExpressions:
-        - key: alertconfig
-          operator: In
-          values:
-            - cfg-01
+    alertmanagerSpec:
+      alertmanagerConfigSelector:
+        matchExpressions:
+          - key: alertconfig
+            operator: In
+            values:
+              - cfg-01
 
     ingress:
       enabled: true
