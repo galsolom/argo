@@ -6,6 +6,8 @@
   alertmanager:
     enabled: true
     alertmanagerSpec:
+      configMaps: 
+      - alertmanager-cfg01
       alertmanagerConfigSelector:
         matchExpressions:
           - key: alertconfig
