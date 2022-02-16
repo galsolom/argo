@@ -5,17 +5,13 @@
     hostRootFsMount: false
   alertmanager:
     enabled: true
-    config:
-        global:
-          resolve_timeout: 1m
-          slack_api_url: 'https://hooks.slack.com/services/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'
-          route:
-             receiver: 'slack-galsolom-argo'
-          receivers:
-          - name: 'slack-galsolom-argo'
-          slack_configs:
-          - channel: '#alert-tests'
-            send_resolved: true
+    
+    alertmanagerConfigSelector:
+      matchExpressions:
+        - key: alertconfig
+          operator: In
+          values:
+            - cfg-01
 
     ingress:
       enabled: true
