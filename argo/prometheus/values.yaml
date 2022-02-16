@@ -8,7 +8,7 @@
     config:
         global:
           resolve_timeout: 1m
-          slack_api_url: 'https://hooks.slack.com/services/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'
+          slack_api_url: 'https://hooks.slack.com/services/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'
           route:
              receiver: 'slack-galsolom-argo'
           receivers:
