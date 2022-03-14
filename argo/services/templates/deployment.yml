@@ -19,11 +19,6 @@ spec:
         tier: backend
         track: stable
     spec:
-      serviceAccountName: services-sa
-      {{- if .Values.imagePullSecretName }}
-      imagePullSecrets: 
-      - name: {{ .Values.imagePullSecretName }}
-      {{- end -}}
       containers:
       - name: {{ .Release.Name }}
         image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
