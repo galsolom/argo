@@ -1,0 +1,15 @@
+image:
+  repo: docker.io/galsolom/app
+  tag: main-cf5ef7ee0e79abc8e3d335272e98c02541b58d0a
+
+ingressHost: app
+port: 80
+
+replicas: 3
+
+requests:
+  cpu: 100m
+  memory: 50Mi
+limits:
+  cpu: 250m
+  memory: 250Mi

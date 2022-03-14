@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps
+  namespace: argo
+spec:
+  project: default
+  destination:
+    namespace: argo
+    server: https://kubernetes.default.svc
+  source:
+    helm:
+      releaseName: apps
+      version: v3
+      valueFiles:
+          - values.yaml
+    path: platform-apps
+    repoURL: {{ .Values.repo.url }}
+    targetRevision: {{ .Values.repo.targetRevision }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true

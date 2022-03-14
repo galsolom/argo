@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      tier: backend
+      track: stable
+  revisionHistoryLimit: 3
+  replicas: {{.Values.replicas | default 2 }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        app-version: {{ .Values.image.tag }}
+        tier: backend
+        track: stable
+    spec:
+      serviceAccountName: services-sa
+      {{- if .Values.imagePullSecretName }}
+      imagePullSecrets: 
+      - name: {{ .Values.imagePullSecretName }}
+      {{- end -}}
+      containers:
+      - name: {{ .Release.Name }}
+        image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+        ports:
+        - name: http
+          containerPort: {{ .Values.port }}
+        resources:
+          requests:
+            cpu: {{ .Values.requests.cpu | default "100m" | quote }}
+            memory: {{ .Values.requests.memory | default "100Mi" | quote }}
+          limits:
+            cpu: {{ .Values.limits.cpu | default "250m" | quote }}
+            memory: {{ .Values.limits.memory | default "250Mi" | quote }}
+        imagePullPolicy: IfNotPresent
+        readinessProbe:
+          httpGet:
+            path: /health
+            scheme: HTTP
+            port: {{ .Values.port }}
+          initialDelaySeconds: 5
+          timeoutSeconds: 10
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /health
+            scheme: HTTP
+            port: {{ .Values.port }}
+          initialDelaySeconds: 5
+          timeoutSeconds: 10
+          periodSeconds: 15
+

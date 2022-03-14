@@ -1,0 +1,15 @@
+﻿spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    # your fork url
+    repoURL: https://github.com/galsolom/argo
+    targetRevision: test-template
+  project: default
+  domain: .happyhippo.local
+
+enabledApplications:
+  - name: app
+    enabled: true
+    namespace: services
+    url: app
