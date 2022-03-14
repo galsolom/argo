@@ -10,7 +10,7 @@ spec:
       tier: backend
       track: stable
   revisionHistoryLimit: 3
-  replicas: {{.Values.replicas | default 2 }}
+  replicas: {{ .Values.replicas | default 2 }}
   template:
     metadata:
       labels:
