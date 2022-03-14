@@ -14,7 +14,7 @@ spec:
       version: v3
       valueFiles:
           - values.yaml
-    path: platform-apps
+    path: argo/platform-apps
     repoURL: {{ .Values.repo.url }}
     targetRevision: {{ .Values.repo.targetRevision }}
   syncPolicy:
