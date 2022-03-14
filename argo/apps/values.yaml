@@ -24,6 +24,10 @@ enabledApplications:
     namespace: prometheus
     url: grafana
     #
+  - name: metrics-server
+    enabled: true
+    namespace: metrics
+    #
   - name: minio
     enabled: false
     namespace: minio
