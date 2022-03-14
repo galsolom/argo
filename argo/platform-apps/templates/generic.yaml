@@ -21,7 +21,7 @@ spec:
       valueFiles:
           - values/app.yaml
           - env-values.yaml
-    path: services
+    path: argo/services
     repoURL: {{ $.Values.spec.source.repoURL }}
     targetRevision: {{ $.Values.spec.source.targetRevision }}
   syncPolicy:
