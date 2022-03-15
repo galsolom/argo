@@ -1,6 +1,6 @@
 image:
   repo: docker.io/galsolom/app
-  tag: main-147c8e4d56f323c4d525d1ba46ef0e0a730900a4
+  tag: main-0068bde3881ecdbd4f3b2235cb7fa9f9f9f2baa5
 ingressHost: app
 port: 80
 replicas: 3
