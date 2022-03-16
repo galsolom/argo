@@ -30,6 +30,9 @@ argo-cd:
       serviceMonitor:
         enabled: true
         interval: 30s
+        additionalLabels: 
+          release: argocd-server
+
 
   controller:
     metrics:
@@ -62,7 +65,8 @@ argo-cd:
         # -- Prometheus ServiceMonitor namespace
         namespace: "" # "monitoring"
         # -- Prometheus ServiceMonitor labels
-        additionalLabels: {}
+        additionalLabels:
+          release: argocd-controller
       rules:
         # -- Deploy a PrometheusRule for the application controller
         enabled: true
