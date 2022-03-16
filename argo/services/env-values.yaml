@@ -1,0 +1,4 @@
+domain:
+  internalDomain: ".happyhippo.local"
+  envprefix: ""
+  tlsInternalDomain: happyhippo-local-tls

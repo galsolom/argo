@@ -1,4 +1,4 @@
-﻿keycloak:
+keycloak:
   ingress:
     enabled: true
     ingressClassName: "nginx"
@@ -8,14 +8,14 @@
     labels: {}
     rules:
       -
-        host: keycloak.happyhippo.local
+        host: keycloak.gals.local
         paths:
           - path: /
             pathType: Prefix
     tls:
       - hosts:
-          - keycloak.happyhippo.local
-        secretName: "happyhippo-local-tls"
+          - keycloak.gals.local
+        secretName: "gals-local-tls"
 
     console:
       enabled: true
@@ -23,11 +23,11 @@
       annotations: {}
       rules:
         -
-          host: keycloakconsole.happyhippo.local
+          host: keycloakconsole.gals.local
           paths:
             - path: /auth/admin/
               pathType: Prefix
       tls:
       - hosts:
-          - keycloakconsole.happyhippo.local
-        secretName: "happyhippo-local-tls"
+          - keycloakconsole.gals.local
+        secretName: "gals-local-tls"

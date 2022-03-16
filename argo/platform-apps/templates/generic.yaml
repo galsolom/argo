@@ -1,0 +1,43 @@
+{{- range $application := .Values.enabledApplications }}
+{{- if $application.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $application.name }}
+  namespace: argo
+  annotations:
+  {{- if $application.url }}
+    link.argocd.argoproj.io/external-link: https://{{ $application.url }}{{$.Values.spec.domain}}
+  {{- end }}
+spec:
+  project: {{ $.Values.spec.project }}
+  destination:
+    namespace: {{ $application.namespace }}
+    server: {{ $.Values.spec.destination.server }}
+  source:
+    helm:
+      releaseName: {{ $application.name }}
+      version: v3
+      valueFiles:
+          - values/{{ $application.name }}.yaml
+          - env-values.yaml
+    path: argo/services
+    repoURL: {{ $.Values.spec.source.repoURL }}
+    targetRevision: {{ $.Values.spec.source.targetRevision }}
+  ignoreDifferences:
+  - group: "apps"
+    kind: "Deployment"
+    jsonPointers:
+    - /spec/replicas
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    automated:
+      selfHeal: true
+      prune: true
+{{- end }}
+---
+{{- end }}
+

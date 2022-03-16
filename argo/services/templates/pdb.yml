@@ -1,0 +1,10 @@
+# apiVersion: policy/v1beta1
+# kind: PodDisruptionBudget
+# metadata:
+#   name: {{ .Release.Name }}-pdb
+#   namespace: {{ .Release.Namespace }}
+# spec:
+#   maxUnavailable: 2
+#   selector:
+#     matchLabels:
+#       app: {{ .Release.Name }}

@@ -1,4 +1,4 @@
-﻿argo-workflows:
+argo-workflows:
   server:
     # -- Deploy the Argo Server
     enabled: true
@@ -19,7 +19,7 @@
       ingressClassName: nginx
 
       hosts: 
-        - argoworkflows.happyhippo.local
+        - argoworkflows.gals.local
 
       paths:
         - /
@@ -28,7 +28,6 @@
       extraPaths: []
 
       tls: 
-        - secretName: happyhippo-local-tls
+        - secretName: gals-local-tls
           hosts:
-            - argoworkflows.happyhippo.local
-
+            - argoworkflows.gals.local

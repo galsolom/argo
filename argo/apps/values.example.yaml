@@ -1,12 +1,12 @@
-﻿spec:
+spec:
   destination:
     server: https://kubernetes.default.svc
   source:
     # your fork url
     repoURL: https://github.com/galsolom/argo
-    targetRevision: test-template
+    targetRevision: main
   project: default
-  domain: .happyhippo.local
+  domain: .gals.local
 
 enabledApplications:
   - name: argocd
@@ -20,13 +20,9 @@ enabledApplications:
     url: argoworkflows
     #
   - name: prometheus
-    enabled: true
+    enabled: false
     namespace: prometheus
     url: grafana
-    #
-  - name: metrics-server
-    enabled: true
-    namespace: metrics
     #
   - name: minio
     enabled: false

@@ -1,10 +1,15 @@
 # some argo generic ecosystem with self managed argocd server on docker-desktop
 ## before starting, change/edit the following:
+fork this repo and run the powershell script, it'll simply create new value files with your repo and some generic name for the tls secrets and the domain (e.g argocd.gals.local)
+```powershell
+example:
+.\fixer.ps1 -repository "https://github.com/galsolom/argo" -localNaming "gals" -branch test-template
+# your forked repo..
+.\fixer.ps1 -repository "https://github.com/<your-repository>/argo" -localNaming "happyhippo" -branch main
+```
 
-* argo\apps\values.yaml .spec.source.repoURL, currently points at the github.com/galsolom/argo repository.
-* argo\argocd\values.yaml .repo, same as above.
-* all tls secrets are named gals-local-tls
-* all ingresses point to *.gals.local
+* all tls secrets are now named happyhippo-local-tls
+* all ingresses point to  *.happyhippo.local domain. (argocd.happyhippo.local, argoworkflows.happyhippo.local etc.)
 ## installation
 verify kuberentes context and connection
 ```
@@ -32,12 +37,15 @@ choco install mkcert
 in root dir:
 ```
 mkcert *.gals.local
+# or your name.. e.g: mkcert *.happyhippo.local
 # creating the tls secret using the cert above
 kubectl create ns argo
 kubectl create secret tls gals-local-tls --key  _wildcard.gals.local-key.pem --cert _wildcard.gals.local.pem -n argo
+# the tls secret name must match the ones under the ingress secret name.
+# kubectl create secret tls happyhippo-local-tls --key  _wildcard.happyhippo.local-key.pem --cert _wildcard.happyhippo.local.pem -n argo
 ```
-install argocd:
-(edit values yaml.. mostly ingress & tls secret name)
+install argocd (this installs the chart in the directory, by default it'll grab values.yaml):
+argo will eventually will manage itself,
 ```
 helm install argocd -n argo .\argo\argocd
 ```
@@ -51,7 +59,7 @@ $argocdpodname = kubectl get pods -n argo -l app.kubernetes.io/name=argocd-serve
 
 # login
 kubectl exec -it $argocdpodname -n argo -- argocd login --insecure --grpc-web argocd-server  --username admin --password $argocdPass --plaintext
-# sync root app sometimes it takes few seconds to return a response, no harm running more times..
+# first sync sometimes takes few seconds to return a response, wait few seconds and re-run below command..
 kubectl exec -it $argocdpodname -n argo -- argocd app sync apps
 ```
 
@@ -72,7 +80,7 @@ windows path:
 ```
 C:\Windows\System32\drivers\etc\hosts
 
-127.0.0.240 kubernetes.docker.internal argocd.gals.local argoworkflows.gals.local grafana.gals.local
+127.0.0.240 argocd.gals.local argoworkflows.gals.local grafana.gals.local
 ```
 verify argocd login is accessible
 browse to
@@ -83,6 +91,8 @@ Username: admin
 
 Password:
 ```powershell
+$argocdpass | scb # for the ui..
+# OR
 kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_))} | scb
 ```
 
@@ -91,14 +101,29 @@ kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.passw
  powershell as admin
  ```powershell
  restart-service iphlpsvc -force
- # once working, stop the service..
+ # this service seems to do a lot of issues for wsl2\windows,
+ # after a few mins of work the (webpage hang) issue seems to return so once i can access the ui from the browser, I stop the service
  stop-service iphlpsvc -force
  ```
 
  
 
 
-root app wil be automatically installed(apps), below steps are for manual adding the root application
+root app should already installed (apps)
+verify:
+```
+kubectl get applications -A
+# output
+NAMESPACE   NAME            SYNC STATUS   HEALTH STATUS
+argo        apps            Synced        Healthy      
+argo        argocd          Synced        Healthy      
+argo        argoworkflows   Synced        Healthy      
+argo        ingress-nginx   Synced        Healthy      
+argo        metallb         Synced        Healthy 
+```
+
+## work in progress..
+below steps are for manual adding the root application
 in argocd add manually the root app, it'll include argocd itself:
 
 create application in argo namespace with the galsolom/argo.git repo, point to
@@ -126,8 +151,6 @@ kubectl get pods -n argo | ?{$_ -like "*workflows-server*"} | %{$_.split()[0]} |
 
 
 ## testing some workflow builds
-
-
 
 
 create docker-registry secret for kaniko:

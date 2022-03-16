@@ -1,6 +1,6 @@
-﻿repo:
+repo:
   url: &url https://github.com/galsolom/argo
-  targetRevision: test-template
+  targetRevision: main
 
 argo-cd:
   server:
@@ -12,7 +12,7 @@ argo-cd:
       ingressClassName: "nginx"
 
       hosts:
-        - argocd.happyhippo.local
+        - argocd.gals.local
 
       paths:
         - /
@@ -20,12 +20,11 @@ argo-cd:
       extraPaths: []
 
       tls:
-        - secretName: happyhippo-local-tls
+        - secretName: gals-local-tls
           hosts:
-            - argocd.happyhippo.local
+            - argocd.gals.local
 
   configs:
     repositories: 
       repo:
         url: *url
-
