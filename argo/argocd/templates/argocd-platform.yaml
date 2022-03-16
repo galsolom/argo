@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     helm:
-      releaseName: apps
+      releaseName: platform-apps
       version: v3
       valueFiles:
           - values.yaml
