@@ -25,7 +25,8 @@ argo-cd:
       enabled: true
       service:
         annotations: {}
-        labels: {}
+        labels: 
+          release: argocd-server
         servicePort: 8083
       serviceMonitor:
         enabled: true
@@ -46,7 +47,8 @@ argo-cd:
         # -- Metrics service annotations
         annotations: {}
         # -- Metrics service labels
-        labels: {}
+        labels: 
+          release: argocd-controller
         # -- Metrics service port
         servicePort: 8082
       serviceMonitor:
