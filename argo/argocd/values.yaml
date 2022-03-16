@@ -28,6 +28,7 @@ argo-cd:
     repositories: 
       repo:
         url: *url
+  
   metrics:
   # -- Deploy metrics service
   enabled: true
