@@ -16,10 +16,10 @@ spec:
     server: {{ $.Values.spec.destination.server }}
   source:
     helm:
-      releaseName: app
+      releaseName: {{ $application.name }}
       version: v3
       valueFiles:
-          - values/app.yaml
+          - values/{{ $application.name }}.yaml
           - env-values.yaml
     path: argo/services
     repoURL: {{ $.Values.spec.source.repoURL }}

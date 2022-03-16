@@ -2,13 +2,3 @@ domain:
   internalDomain: ".happyhippo.local"
   envprefix: ""
   tlsInternalDomain: happyhippo-local-tls
-
-
-replicas: 2
-
-requests:
-  cpu: 100m
-  memory: 50Mi
-limits:
-  cpu: 500m
-  memory: 250Mi

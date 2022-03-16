@@ -27,7 +27,7 @@ spec:
           containerPort: {{ .Values.port }}
         resources:
           requests:
-            cpu: {{ .Values.requests.cpu | default "100m" | quote }}
+            cpu: {{ .Values.requests.cpu | default "10m" | quote }}
             memory: {{ .Values.requests.memory | default "100Mi" | quote }}
           limits:
             cpu: {{ .Values.limits.cpu | default "250m" | quote }}
@@ -40,7 +40,7 @@ spec:
             port: {{ .Values.port }}
           initialDelaySeconds: 5
           timeoutSeconds: 10
-          periodSeconds: 15
+          periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /health
@@ -48,5 +48,5 @@ spec:
             port: {{ .Values.port }}
           initialDelaySeconds: 5
           timeoutSeconds: 10
-          periodSeconds: 15
+          periodSeconds: 10
 
