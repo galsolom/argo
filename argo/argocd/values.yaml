@@ -94,7 +94,7 @@ argo-cd:
               state inside Git.
         selector:
           prometheus: kube-prometheus
-        namespace: monitoring
+        namespace: prometheus
 
   configs:
     repositories: 
