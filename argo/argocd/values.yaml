@@ -26,13 +26,13 @@ argo-cd:
       service:
         annotations: {}
         labels: 
-          release: argocd-server
+          release: prometheus
         servicePort: 8083
       serviceMonitor:
         enabled: true
         interval: 30s
         additionalLabels: 
-          release: argocd-server
+          release: prometheus
 
 
   controller:
@@ -48,7 +48,7 @@ argo-cd:
         annotations: {}
         # -- Metrics service labels
         labels: 
-          release: argocd-controller
+          release: prometheus
         # -- Metrics service port
         servicePort: 8082
       serviceMonitor:
@@ -68,7 +68,7 @@ argo-cd:
         namespace: "" # "monitoring"
         # -- Prometheus ServiceMonitor labels
         additionalLabels:
-          release: argocd-controller
+          release: prometheus
       rules:
         # -- Deploy a PrometheusRule for the application controller
         enabled: true
