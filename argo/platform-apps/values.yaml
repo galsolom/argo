@@ -4,7 +4,7 @@
   source:
     # your fork url
     repoURL: https://github.com/galsolom/argo
-    targetRevision: test-template
+    targetRevision: main
   project: default
   domain: .happyhippo.local
 

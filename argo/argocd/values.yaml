@@ -1,6 +1,6 @@
 ﻿repo:
   url: &url https://github.com/galsolom/argo
-  targetRevision: test-template
+  targetRevision: main
 
 argo-cd:
   server:

@@ -3,7 +3,7 @@
 fork this repo and run the powershell script, it'll simply create new value files with your repo and some generic name for the tls secrets and the domain (e.g argocd.gals.local)
 ```powershell
 example:
-.\fixer.ps1 -repository "https://github.com/galsolom/argo" -localNaming "gals" -branch test-template
+.\fixer.ps1 -repository "https://github.com/galsolom/argo" -localNaming "gals" -branch main
 # your forked repo..
 .\fixer.ps1 -repository "https://github.com/<your-repository>/argo" -localNaming "happyhippo" -branch main
 ```
