@@ -171,10 +171,10 @@ argo-cd:
     configManagementPlugins: |
       - name: helmfile
         init:                          
-          command: ["argo-cd-helmfile.sh"]
+          command: ["/usr/local/bin/argo-cd-helmfile.sh"]
           args: ["init"]
         generate:                      
-          command: ["argo-cd-helmfile.sh"]
+          command: ["/usr/local/bin/argo-cd-helmfile.sh"]
           args: ["generate"]
   configs:
     repositories: 
