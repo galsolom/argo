@@ -4,6 +4,23 @@
 
 argo-cd:
   server:
+    configEnabled: true
+    # -- [General Argo CD configuration]
+    # @default -- See [values.yaml]
+    config:
+      # Argo CD's externally facing base URL (optional). Required when configuring SSO
+      url: ""
+      configManagementPlugins: |
+        - name: helmfile
+          init:                          
+            command: ["argo-cd-helmfile.sh"]
+            args: ["init"]
+          generate:                      
+            command: ["argo-cd-helmfile.sh"]
+            args: ["generate"]
+      # Argo CD instance label key
+      application.instanceLabelKey: argocd.argoproj.io/instance
+      users.anonymous.enabled: "true"
     volumeMounts:
     - mountPath: /usr/local/bin/argo-cd-helmfile.sh
       name: custom-tools
@@ -114,7 +131,7 @@ argo-cd:
           prometheus: kube-prometheus
         namespace: prometheus
 
-  configs:
+  config:
     configManagementPlugins: |
       - name: helmfile
         init:                          
@@ -123,6 +140,7 @@ argo-cd:
         generate:                      
           command: ["argo-cd-helmfile.sh"]
           args: ["generate"]
+  configs:
     repositories: 
       repo:
         url: *url
