@@ -4,6 +4,17 @@
 
 argo-cd:
   server:
+    volumeMounts:
+    - mountPath: /usr/local/bin/argo-cd-helmfile.sh
+      name: custom-tools
+      subPath: argo-cd-helmfile.sh
+    - mountPath: /usr/local/bin/helmfile
+      name: custom-tools
+      subPath: helmfile
+    volumes: 
+    - name: custom-tools
+      emptyDir: {}
+
     extraArgs: 
     - --insecure
 
@@ -33,6 +44,7 @@ argo-cd:
         interval: 30s
         additionalLabels: 
           release: prometheus
+    
 
 
   controller:
@@ -103,6 +115,15 @@ argo-cd:
         namespace: prometheus
 
   configs:
+    configManagementPlugins: |
+      - name: helmfile
+        init:                          
+          command: ["argo-cd-helmfile.sh"]
+          args: ["init"]
+        generate:                      
+          command: ["argo-cd-helmfile.sh"]
+          args: ["generate"]
+    users.anonymous.enabled: "true"
     repositories: 
       repo:
         url: *url
