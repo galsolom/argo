@@ -22,16 +22,7 @@ argo-cd:
       # Argo CD instance label key
       application.instanceLabelKey: argocd.argoproj.io/instance
       users.anonymous.enabled: "true"
-    volumeMounts:
-    - mountPath: /usr/local/bin/argo-cd-helmfile.sh
-      name: custom-tools
-      subPath: argo-cd-helmfile.sh
-    - mountPath: /usr/local/bin/helmfile
-      name: custom-tools
-      subPath: helmfile
-    volumes: 
-    - name: custom-tools
-      emptyDir: {}
+    
 
     extraArgs: 
     - --insecure
@@ -78,6 +69,16 @@ argo-cd:
       volumeMounts:
         - mountPath: /custom-tools
           name: custom-tools
+    volumeMounts:
+      - mountPath: /usr/local/bin/argo-cd-helmfile.sh
+        name: custom-tools
+        subPath: argo-cd-helmfile.sh
+      - mountPath: /usr/local/bin/helmfile
+        name: custom-tools
+        subPath: helmfile
+    volumes: 
+      - name: custom-tools
+        emptyDir: {}
     metrics:
       enabled: true
       applicationLabels:
