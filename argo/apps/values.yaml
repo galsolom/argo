@@ -8,6 +8,9 @@
   project: default
   domain: .happyhippo.local
 
+helmfile:
+  env: dev
+
 enabledApplications:
   - name: argocd
     enabled: true

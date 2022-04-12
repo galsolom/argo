@@ -5,10 +5,10 @@ metadata:
   name: helm-test
   namespace: argo
 spec:
+  project: {{ $.Values.spec.project }}
   destination:
     namespace: default
-    server: https://kubernetes.default.svc
-  project: default
+    server: {{ $.Values.spec.destination.server }}
   source:
     path: ./argo/helmfile-test
     plugin:
@@ -16,7 +16,7 @@ spec:
       - name: CLUSTER_ID
         value: primary
       - name: HELMFILE_GLOBAL_OPTIONS
-        value: --environment dev
+        value: --environment {{ $.Values.helmfile.env }}
       name: helmfile
     repoURL: {{ $.Values.spec.source.repoURL }}
     targetRevision: {{ $.Values.spec.source.targetRevision }}
