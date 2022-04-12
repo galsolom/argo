@@ -33,7 +33,7 @@ enabledApplications:
     url: grafana
     #
   - name: metrics-server
-    enabled: false
+    enabled: true
     namespace: metrics
     #
   - name: minio
@@ -51,7 +51,7 @@ enabledApplications:
     namespace: keycloak
 # network
   - name: metallb
-    enabled: false
+    enabled: true
     namespace: metallb-system
     #
   - name: ingress-nginx
