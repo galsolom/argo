@@ -15,11 +15,21 @@ spec:
     namespace: {{ $application.namespace }}
     server: {{ $.Values.spec.destination.server }}
   source:
+  {{- if $application.plugin }}
+    plugin:
+      name: helmfile
+      env:
+      - name: CLUSTER_ID
+        value: primary
+      - name: HELMFILE_GLOBAL_OPTIONS
+        value: --environment {{ $.Values.helmfile.env }}
+  {{- else }}
     helm:
       releaseName: {{ $application.name }}
       version: v3
       valueFiles:
           - values.yaml
+  {{- end }}
     path: argo/{{ $application.name }}
     repoURL: {{ $.Values.spec.source.repoURL }}
     targetRevision: {{ $.Values.spec.source.targetRevision }}

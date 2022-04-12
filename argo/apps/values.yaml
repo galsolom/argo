@@ -17,18 +17,23 @@ enabledApplications:
     namespace: argo
     url: argocd
     #
-  - name: argoworkflows
+  - name: helmfile
     enabled: true
+    namespace: default
+    plugin: helmfile
+    #
+  - name: argoworkflows
+    enabled: false
     namespace: argo
     url: argoworkflows
     #
   - name: prometheus
-    enabled: true
+    enabled: false
     namespace: prometheus
     url: grafana
     #
   - name: metrics-server
-    enabled: true
+    enabled: false
     namespace: metrics
     #
   - name: minio
@@ -46,7 +51,7 @@ enabledApplications:
     namespace: keycloak
 # network
   - name: metallb
-    enabled: true
+    enabled: false
     namespace: metallb-system
     #
   - name: ingress-nginx
