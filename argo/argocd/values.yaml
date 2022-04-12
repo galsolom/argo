@@ -4,28 +4,28 @@
 
 argo-cd:
   server:
-    initContainers:
-    - name: download-tools
-      image: alpine:3.8
-      command: [sh, -c]
-      args:
-        - wget -qO /custom-tools/argo-cd-helmfile.sh https://raw.githubusercontent.com/travisghansen/argo-cd-helmfile/master/src/argo-cd-helmfile.sh &&
-          chmod +x /custom-tools/argo-cd-helmfile.sh &&
-          wget -qO /custom-tools/helmfile https://github.com/roboll/helmfile/releases/download/v0.138.7/helmfile_linux_amd64 &&
-          chmod +x /custom-tools/helmfile
-      volumeMounts:
-        - mountPath: /custom-tools
-          name: custom-tools
-    volumeMounts:
-      - mountPath: /usr/local/bin/argo-cd-helmfile.sh
-        name: custom-tools
-        subPath: argo-cd-helmfile.sh
-      - mountPath: /usr/local/bin/helmfile
-        name: custom-tools
-        subPath: helmfile
-    volumes: 
-      - name: custom-tools
-        emptyDir: {}
+    # initContainers:
+    # - name: download-tools
+    #   image: alpine:3.8
+    #   command: [sh, -c]
+    #   args:
+    #     - wget -qO /custom-tools/argo-cd-helmfile.sh https://raw.githubusercontent.com/travisghansen/argo-cd-helmfile/master/src/argo-cd-helmfile.sh &&
+    #       chmod +x /custom-tools/argo-cd-helmfile.sh &&
+    #       wget -qO /custom-tools/helmfile https://github.com/roboll/helmfile/releases/download/v0.138.7/helmfile_linux_amd64 &&
+    #       chmod +x /custom-tools/helmfile
+    #   volumeMounts:
+    #     - mountPath: /custom-tools
+    #       name: custom-tools
+    # volumeMounts:
+    #   - mountPath: /usr/local/bin/argo-cd-helmfile.sh
+    #     name: custom-tools
+    #     subPath: argo-cd-helmfile.sh
+    #   - mountPath: /usr/local/bin/helmfile
+    #     name: custom-tools
+    #     subPath: helmfile
+    # volumes: 
+    #   - name: custom-tools
+    #     emptyDir: {}
     
     configEnabled: true
     # -- [General Argo CD configuration]
@@ -77,8 +77,7 @@ argo-cd:
           release: prometheus
     
 
-
-  controller:
+  repoServer:
     initContainers:
     - name: download-tools
       image: alpine:3.8
@@ -100,7 +99,9 @@ argo-cd:
         subPath: helmfile
     volumes: 
       - name: custom-tools
-        emptyDir: {}
+        emptyDir: {} 
+        
+  controller:
     metrics:
       enabled: true
       applicationLabels:
