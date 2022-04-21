@@ -28,7 +28,7 @@ enabledApplications:
     url: argoworkflows
     #
   - name: prometheus
-    enabled: false
+    enabled: true
     namespace: prometheus
     url: grafana
     #
