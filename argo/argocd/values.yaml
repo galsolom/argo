@@ -67,11 +67,13 @@ argo-cd:
   repoServer:
     initContainers:
     - name: download-tools
-      image: docker.io/galsolom/helmfiles:1.1
+      image: alpine:3.8
       command: [sh, -c]
       args:
-        - chmod +x ./argo-cd-helmfile.sh &&
-          chmod +x ./helmfile
+        - wget -qO argo-cd-helmfile.sh https://raw.githubusercontent.com/travisghansen/argo-cd-helmfile/master/src/argo-cd-helmfile.sh && \
+          chmod +x argo-cd-helmfile.sh && \
+          wget -qO helmfile https://github.com/roboll/helmfile/releases/download/$HELMFILE_VERSION/helmfile_linux_amd64 && \
+          chmod +x helmfile
       volumeMounts:
         - mountPath: /custom-tools
           name: custom-tools
