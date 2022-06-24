@@ -17,7 +17,6 @@ argo-cd:
             command: ["argo-cd-helmfile.sh"]
             args: ["generate"]
       application.instanceLabelKey: argocd.argoproj.io/instance
-      users.anonymous.enabled: "true"
       resource.customizations: |
         argoproj.io/Application:
           health.lua: |
@@ -68,7 +67,11 @@ argo-cd:
   repoServer:
     initContainers:
     - name: download-tools
-      image: docker.io/galsolom/helmfiles:1.0
+      image: docker.io/galsolom/helmfiles
+      command: [sh, -c]
+      args:
+        - chmod +x /custom-tools/argo-cd-helmfile.sh &&
+          chmod +x /custom-tools/helmfile
       volumeMounts:
         - mountPath: /custom-tools
           name: custom-tools
