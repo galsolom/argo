@@ -67,7 +67,7 @@ argo-cd:
   repoServer:
     initContainers:
     - name: download-tools
-      image: docker.io/galsolom/helmfiles:1.0
+      image: docker.io/galsolom/helmfiles:1.1
       command: [sh, -c]
       args:
         - chmod +x ./argo-cd-helmfile.sh &&
