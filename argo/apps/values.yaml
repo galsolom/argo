@@ -33,7 +33,7 @@ enabledApplications:
     url: grafana
     #
   - name: metrics-server
-    enabled: true
+    enabled: false
     namespace: metrics
     #
   - name: minio
