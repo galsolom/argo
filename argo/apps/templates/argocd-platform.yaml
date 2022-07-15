@@ -4,10 +4,10 @@ metadata:
   name: platform-apps
   namespace: argo
 spec:
-  project: default
+  project: {{ $.Values.spec.project }}
   destination:
     namespace: argo
-    server: https://kubernetes.default.svc
+    server: {{ $.Values.spec.destination.server }}
   source:
     helm:
       releaseName: platform-apps
@@ -15,8 +15,8 @@ spec:
       valueFiles:
           - values.yaml
     path: argo/platform-apps
-    repoURL: {{ .Values.repo.url }}
-    targetRevision: {{ .Values.repo.targetRevision }}
+    repoURL:  {{ $.Values.spec.destination.server }}
+    targetRevision: {{ $.Values.spec.source.targetRevision }}
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
