@@ -9,6 +9,9 @@ metadata:
   {{- if $application.url }}
     link.argocd.argoproj.io/external-link: https://{{ $application.url }}{{$.Values.spec.domain}}
   {{- end }}
+  {{- if $application.syncWave }}
+    argocd.argoproj.io/sync-wave: "{{ $application.syncWave }}"
+  {{- end }}
 spec:
   project: {{ $.Values.spec.project }}
   destination:

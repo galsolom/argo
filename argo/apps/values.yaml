@@ -28,7 +28,7 @@ enabledApplications:
     url: argoworkflows
     #
   - name: prometheus
-    enabled: true
+    enabled: false
     namespace: prometheus
     url: grafana
     skipCrds: true
