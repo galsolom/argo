@@ -26,6 +26,9 @@ spec:
   {{- else }}
     helm:
       releaseName: {{ $application.name }}
+    {{- if $application.skipCrds }}
+      skipCrds: true
+    {{- end }}
       version: v3
       valueFiles:
           - values.yaml

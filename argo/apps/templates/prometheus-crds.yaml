@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+  name: prometheus-crds
+  namespace: argo
+spec:
+  project: {{ $.Values.spec.project }}
+  destination:
+    namespace: prometheus
+    server: {{ $.Values.spec.destination.server }}
+  source:
+    repoURL: https://github.com/prometheus-community/helm-charts.git
+    path: charts/kube-prometheus-stack/crds/
+    targetRevision: kube-prometheus-stack-30.1.0
+    directory:
+      recurse: true
+    syncOptions:
+    - Replace=true
