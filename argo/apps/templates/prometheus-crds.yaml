@@ -15,5 +15,5 @@ spec:
     targetRevision: kube-prometheus-stack-30.1.0
     directory:
       recurse: true
-    syncOptions:
+  syncOptions:
     - Replace=true
