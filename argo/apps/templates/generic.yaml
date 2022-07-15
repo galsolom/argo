@@ -3,6 +3,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  {{- if $application.tier }}
+    labels:
+      tier: {{ $application.tier }}
+  {{- end }}
   name: {{ $application.name }}
   namespace: argo
   annotations:
