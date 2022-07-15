@@ -27,7 +27,7 @@ spec:
     helm:
       releaseName: {{ $application.name }}
     {{- if $application.skipCrds }}
-      skipCrds: true
+      # skipCrds: true
     {{- end }}
       version: v3
       valueFiles:
