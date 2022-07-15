@@ -13,7 +13,7 @@ helmfile:
 
 enabledApplications:
   - name: argocd
-    enabled: true
+    enabled: false
     namespace: argo
     url: argocd
     #
