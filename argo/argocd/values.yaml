@@ -3,6 +3,9 @@
   targetRevision: main
 
 argo-cd:
+  global:
+    image:
+      repository: docker.io/argoproj/argocd
   server:
     
     configEnabled: true
