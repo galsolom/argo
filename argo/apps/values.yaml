@@ -28,10 +28,11 @@ enabledApplications:
     url: argoworkflows
     #
   - name: prometheus
-    enabled: false
+    enabled: true
     namespace: prometheus
     url: grafana
     skipCrds: true
+    syncWave: 2
     #
   - name: metrics-server
     enabled: false
