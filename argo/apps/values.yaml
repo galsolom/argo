@@ -35,7 +35,7 @@ enabledApplications:
     syncWave: 2
     #
   - name: metrics-server
-    enabled: false
+    enabled: true
     namespace: metrics
     #
   - name: minio
