@@ -3,7 +3,7 @@ metrics-server:
     - --cert-dir=/tmp
     - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
     - --kubelet-use-node-status-port
-    - --metric-resolution=15s
+    - --metric-resolution=90s
     - --kubelet-insecure-tls
     - --kubelet-preferred-address-types=InternalIP
 
